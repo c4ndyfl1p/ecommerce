@@ -49,7 +49,7 @@ def checkout(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer = customer, complete=False)
         items = order.orderitem_set.all()
-        cartItems = order[get_cart_items]
+        cartItems = order.get_cart_items
     else:
         # when user is not logged on. Creating manual 0 values
         # so no error is thrown
