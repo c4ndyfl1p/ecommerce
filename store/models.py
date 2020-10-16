@@ -48,6 +48,8 @@ class Order(models.Model):
 
     def get_cart_items(self):
         orderitems = self.orderitem_set.all()
+         # if isinstance(self.quantity, type(None)):
+        #     self.quantity = 0
         total = sum([item.quantity for item in orderitems])
         return total
 
@@ -59,13 +61,15 @@ class Order(models.Model):
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     order = models.ForeignKey(Order, on_delete = models.SET_NULL, null=True)
-    quantity = models.IntegerField(null=True, blank=True)
+    quantity = models.IntegerField(null=False, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
 
     @property
     def get_total(self):
+        # if self.quantity is None:
+        #     self.quantity = 0
         total = self.product.price * self.quantity
-        return total
+        return int(total)
 
 
 class ShippingAddress(models.Model):
