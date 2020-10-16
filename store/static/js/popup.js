@@ -30,10 +30,10 @@ updatePop[i].addEventListener('click', function(){
 
     description_location.innerHTML = productDescription
 
-    add_cart_location.innerHTML = '<button data-product=' + productId +'data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>'
+    add_cart_location.innerHTML = '<button data-product="' + productId +'" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Wishlist</button>'
 
     // Change the following according to wishlist backend, dummy button- functions as add to cart
-    wishlist_location.innerHTML = '<button data-product=' + productId +'data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Wishlist</button>'
+    wishlist_location.innerHTML = '<button data-product="' + productId +'" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Wishlist</button>'
 
     price_location.innerHTML = '<h4 style="display: inline-block; float:right">Price: <strong>&#8377;' + productPrice + '</strong></h4>'
 

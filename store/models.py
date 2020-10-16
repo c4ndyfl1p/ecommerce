@@ -1,14 +1,27 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 # Create your models here.
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+     # onetoone means a user can have only one customer and a cust can have only one user
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
 
-    def __str__(self):
-        return self.name
+    @receiver(post_save, sender=User)
+    def create_user_customer(sender, instance, created, **kwargs):
+        if created:
+            Customer.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_customer(sender, instance, **kwargs):
+        instance.customer.save()
+
+    # def __str__(self):
+    #     return self.user
 
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
@@ -24,6 +37,7 @@ class Product(models.Model):
         return self.name
 
     @property
+    # expensive try if == undefined
     def imageURL(self):
         try:
             url = self.image.url
@@ -61,7 +75,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     order = models.ForeignKey(Order, on_delete = models.SET_NULL, null=True)
-    quantity = models.IntegerField(null=False, blank=False)
+    quantity = models.IntegerField(null=False, blank=False, default=0)
     date_added = models.DateTimeField(auto_now_add=True)
 
     @property

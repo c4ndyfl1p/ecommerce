@@ -70,7 +70,13 @@
           <!-- form wrapper -->
             
             <div class="form-inline my-2 my-lg-0">
-                <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
+                {% if user.is_authenticated %}
+                    Welcome, <a href="#"class="btn-warning">{{user.username}}</a>
+                    <a href="{% url 'logout' %}" class="btn btn-warning">Logout</a>
+                {% else %}
+                    <a href= "{% url 'register' %}" class="btn btn-warning">Register</a>
+                    <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
+                {% endif %}
                         
                 <a href="{% url 'cart' %}"> 
                     <img  id="cart-icon" src="{% static 'images/cart.png' %}">                
@@ -81,6 +87,13 @@
         </div>
     </nav>
     <hr onmouseover="clearSearch()">
+
+    <!-- {%  if messages %}
+        {%for message in messages%}
+            {{message}}
+        {%endfor%}
+    {% endif %} -->
+
 
     <div class = "container">
         

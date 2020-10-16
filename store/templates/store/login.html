@@ -2,31 +2,27 @@
 {% load static %}
 {% block content %}
 
-<style>
-body ,html{font-family: Arial, Helvetica, sans-serif;;}
-.login{
-    width:fit-content;
-    padding: 60px;
-   
-   
-    height:fit-content;
-    margin:0 auto;
-    margin-top: 2%;
-    box-shadow:hsl(0, 0%, 80%) 0 0 16px;
-	background-color: #fff;
-}
-/* Full-width input fields */
-.login .form-control {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-shadow:hsl(0, 0%, 80%) 0 0 16px;
-  box-sizing: border-box;
-}
-</style>
-<form class="login">
+<!-- refer: https://getbootstrap.com/docs/4.5/layout/grid/#row-columns -->
+
+<div class = "container">
+    <form method = "POST" class="login">
+
+        If you don't already have an account, register </a> for one.
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+
+
+        <button type="submit">Login</button>
+
+    </form>
+</div>
+
+
+
+{% endblock content %}
+<!--form class="login">
     <div class="form-group">
         <label for="inputEmail">Email</label>
         <input type="email" class="form-control" id="inputEmail" placeholder="Email">
@@ -39,7 +35,7 @@ body ,html{font-family: Arial, Helvetica, sans-serif;;}
     <div class="signup">
         Don't have an account? <a href="{% url 'signup' %}">Create here!</a>
     </div>
-</form>
+</!--form-->
 
 
 {% endblock content %}
