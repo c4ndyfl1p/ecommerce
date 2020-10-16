@@ -36,6 +36,28 @@
         
         <br>
         <div id="product_view" class = "row justify-content-md-center bg-change" onmouseover="clearSearch()">
+           <!--Code for pop up box giving product details-->
+           <div class="popup" id="popup-1" data-name={{product1.id}}>
+            <div class ="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="togglePopup()">&times;</div>
+                <h3 id="popup_title"></h3>
+                <hr>
+                <div id="popup_image"></div>
+                <div id="popup_description"></div>
+                <hr/>
+                <div id="popup_price"></div>
+                <div id="popup_buttons">
+                    <span id ="cart_button"></span>
+                    <span id ="wishlist_button"></span>
+                </div>
+                <div id="popup_review">
+                    <h5>Review:</h5>
+                </div>
+            </div>
+        </div>
+        <!--End-->
+
             
            
             {% for product in products %}
