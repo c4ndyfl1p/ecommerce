@@ -4,6 +4,7 @@
 <head>
     <title>Ecom</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}">
         
     <!-- commenting this out breaks main.css -->
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" /> -->
@@ -12,7 +13,6 @@
 
     <script type="text/javascript">
         var user = '{{request.user}}'
-
         function getToken(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -37,7 +37,7 @@
 </head>
 <!-- <body style="background-color:hsl(0, 0%, 16%);"> -->
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
         <a class="navbar-brand" href="#">JARThreeDeeWale</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -47,6 +47,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                 <a class="nav-link" href="{% url 'store' %}">Store <span class="sr-only">(current)</span></a>
+               
                 </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -67,47 +68,43 @@
             </li> -->
           </ul>
           <!-- form wrapper -->
-            <!-- <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form> -->
+            
             <div class="form-inline my-2 my-lg-0">
-
                 {% if user.is_authenticated %}
-                    Welcome, <a href="#"class="btn-warning">{{user.username}}</a>
+                    <p id="welcome" style="margin: 5px; padding: 5px;
+                    color: white;">Welcome, <a href="#">{{user.username}}!!</a></p>
                     <a href="{% url 'logout' %}" class="btn btn-warning">Logout</a>
                 {% else %}
                     <a href= "{% url 'register' %}" class="btn btn-warning">Register</a>
                     <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
                 {% endif %}
-                
                         
                 <a href="{% url 'cart' %}"> 
                     <img  id="cart-icon" src="{% static 'images/cart.png' %}">                
                 </a>
                 <p id="cart-total">{{cartItems}}</p>
                
-            </div>
-
+             </div>
         </div>
     </nav>
-    <hr>
-    
+    <hr onmouseover="clearSearch()">
+
     <!-- {%  if messages %}
         {%for message in messages%}
             {{message}}
         {%endfor%}
-
     {% endif %} -->
-   
 
-    <div class = "conatiner">
+
+    <div class = "container">
         
         {% block content %}
 
         {% endblock content %}
 
     </div>
+
+    
 
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -118,5 +115,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/popup.js' %}"></script>
+    
 </body>
 </html>
