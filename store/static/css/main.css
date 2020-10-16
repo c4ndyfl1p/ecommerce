@@ -97,3 +97,26 @@ h1,h2,h3,h4,h5,h6{
 .hidden{
 	display: none!important;
 }
+
+body ,html{font-family: Arial, Helvetica, sans-serif;;}
+.login{
+    width:fit-content;
+    padding: 60px;
+   
+   
+    height:fit-content;
+    margin:0 auto;
+    margin-top: 2%;
+    box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+	background-color: #fff;
+}
+/* Full-width input fields */
+.login .form-control {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+  box-sizing: border-box;
+}

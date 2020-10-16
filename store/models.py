@@ -13,8 +13,12 @@ class Customer(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField()
+    description = models.CharField(max_length=5000, null=True)
     digital = models.BooleanField(default=False, null=True, blank=False)
     image = models.ImageField(null=True, blank=True)
+    fandom_good = models.BooleanField(default=False, null=True, blank=False)
+    home_decor = models.BooleanField(default=False, null=True, blank=False)
+    coaster = models.BooleanField(default=False, null=True, blank=False)
 
     def __str__(self):
         return self.name
