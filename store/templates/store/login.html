@@ -5,7 +5,7 @@
 <!-- refer: https://getbootstrap.com/docs/4.5/layout/grid/#row-columns -->
 
 <div class = "container">
-    <form method = "POST">
+    <form method = "POST" class="login">
 
         If you don't already have an account, register </a> for one.
         {% csrf_token %}
@@ -13,12 +13,29 @@
         {{ form.as_p }}
 
 
-        
+
         <button type="submit">Login</button>
-        
+
     </form>
 </div>
 
-    
+
+
+
+<!--form class="login">
+    <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+    </div>
+    <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">Log in</button>
+    <div class="signup">
+        Don't have an account? <a href="">Create here!</a>
+    </div>
+</!--form-->
+
 
 {% endblock content %}
