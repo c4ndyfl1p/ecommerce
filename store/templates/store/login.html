@@ -1,0 +1,24 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<!-- refer: https://getbootstrap.com/docs/4.5/layout/grid/#row-columns -->
+
+<div class = "container">
+    <form method = "POST">
+
+        If you don't already have an account, register </a> for one.
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+
+        
+        <button type="submit">Login</button>
+        
+    </form>
+</div>
+
+    
+
+{% endblock content %}
