@@ -1,21 +1,21 @@
 {% extends 'store/main.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <!-- refer: https://getbootstrap.com/docs/4.5/layout/grid/#row-columns -->
 
 <div class = "container">
     <form method = "POST" class="login">
-
-        If you don't already have an account, register </a> for one.
+        <h3 style="text-align: center;">Login</h3>
+        <hr/>
+        
         {% csrf_token %}
 
-        {{ form.as_p }}
+        {{ form|crispy }}
 
-
-
-        <button type="submit">Login</button>
-
+        <button type="submit" class="btn btn-success">Login</button>
+        <p>Don't have an account?<a href="{% url 'register' %}"> Register here!</a></p>
     </form>
 </div>
 
