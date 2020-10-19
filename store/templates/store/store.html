@@ -3,7 +3,21 @@
 {% block content %}
 
 <!-- refer: https://getbootstrap.com/docs/4.5/layout/grid/#row-columns -->
-
+    <div  class = "row justify-content-md-center bg-change" onmouseover="clearSearch()">
+        <span class="p-3"><strong>Filter:</strong></span>
+        <span class="p-3">
+            <input type="checkbox" id="coaster" checked onchange="filter()" data-status="on">
+            <label>Coasters</label>
+        </span>
+        <span class="p-3">
+            <input type="checkbox" checked id="decor" checked onchange="filter1()" data-status="on">
+            <label>Home Decor</label>
+        </span>
+        <span class="p-3">
+            <input type="checkbox" checked id="fandom" checked onchange="filter2()" data-status="on">
+            <label>Fandom good</label>
+        </span>
+    </div>
     <div class = container style="position: relative;"> 
         <!--Code for filter-->
         
@@ -63,7 +77,7 @@
             {% for product in products %}
             
             
-            <div class = "col-lg-4 product" data-product_name="{{product.name}}" >
+            <div class = "col-lg-4 product" data-product_name="{{product.name}}" data-coaster="{{product.coaster}}" data-decor="{{product.home_decor}}" data-fandom="{{product.fandom_good}}">
                 
                 <img class = "thumbnail" src="{{product.imageURL}}">
                 <div class = "box-element product">
@@ -123,10 +137,10 @@
               } else {
                 li[i].style.display = "none";
               }
-            }
-            
+            }  
           }
-        
+
+          
         </script>
    
     
