@@ -1,9 +1,10 @@
-# Jar3d Ecommerce Website
+# JAR3DWale Ecommerce Website
 
 We have used Django as our backend stack. For frontend we are using web template engine, Jinja, to create frontend.
 
 
 * Open the folder in the terminal.
+* activate virtual environment.
 * install the required libraries (list of reqired libraries can be found on requirement.txt file or see below)
 * initiate django server by using the command "python manage.py runserver"
 * access the webapp using localhost.
