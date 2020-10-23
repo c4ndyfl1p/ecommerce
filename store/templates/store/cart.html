@@ -33,8 +33,7 @@
 				</div>
 
 				{% for item in items %}
-				
-				<div class="cart-row">
+				<div class="cart-row cart_display" data-id={{item.product.id}} data-quantity="{{item.quantity}}">
 					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
 					<div style="flex:2"><p>{{ item.product.name }}</p></div>
 					<div style="flex:1"><p>&#8377;{{ item.product.price}}</p></div>
@@ -48,10 +47,21 @@
 					</div>
 					<div style="flex:1"><p>&#8377;{{item.get_total}}</p></div>
 				</div>
+				
 				{% endfor %}
 
 			</div>
 		</div>
 	</div>
 </div>
+<script>
+	var cart_display = document.getElementsByClassName('cart_display')
+	
+	for(var i=0; i<cart_display.length; i++){
+		if(cart_display[i].dataset.quantity == 0){
+		cart_display[i].style.display="none"
+		}
+	}
+	
+</script>
 {% endblock content %}
