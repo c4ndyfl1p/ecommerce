@@ -62,13 +62,10 @@
                     <div><strong>Product Id: </strong> <span id="popup_id"></span> </div>
                     <div id="popup_description"></div>
                     <hr/>
-                    <div id="popup_price"></div>
+                    <div class="justify-content-md-center" id="popup_price"></div>
                     <div id="popup_buttons">
                         <span id ="cart_button"></span>
                         <span id ="wishlist_button"></span>
-                    </div>
-                    <div id="popup_review">
-                        <h5 style="text-align: left;">Review:</h5>
                     </div>
                 </div>
             </div>
@@ -95,14 +92,13 @@
                             data-product_description="{{product.description}}" 
                             data-product_price = {{product.price}}
                             data-cart_button= '<button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>'
+                            data-wishlist_button= '<button data-product={{product.id}} data-waction="wadd" class="btn btn-outline-secondary add-btn update-wishlist">Add to Wishlist</button>'
                             class="btn btn-outline-success pop_button" 
                             onclick="togglePopup()">
                                 View
                     </button>
                     <!--End-->
 
-                    <button data-product={{product.id}} data-waction="wadd" class="btn btn-outline-secondary add-btn update-wishlist">Add to Wishlist</button>
-                    
 
                     <h4 style="display: inline-block; float:right">
                         <strong>&#8377;{{product.price|floatformat:0}}</strong>
@@ -151,6 +147,9 @@
                 }
 
           var updatePop= document.getElementsByClassName('pop_button')
+
+
+
 
 for(var i = 0; i< updatePop.length; i++){
 updatePop[i].addEventListener('click', function(){
@@ -207,8 +206,26 @@ updatePop[i].addEventListener('click', function(){
 }
 
     // Change the following according to wishlist backend, dummy button- functions as add to cart
-    wishlist_location.innerHTML = '<button data-product="' + productId +'" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Wishlist</button>'
+    wishlist_location.innerHTML = this.dataset.wishlist_button
    
+    var updateBtns1= document.getElementsByClassName('update-wishlist')
+
+    for(var i = 0; i< updateBtns1.length; i++){
+    updateBtns1[i].addEventListener('click', function(){
+        var productId =  this.dataset.product
+        var action = this.dataset.waction
+        console.log('productId:', productId, 'action:', 'action')
+
+        console.log('USER:', user)
+
+        if(user ==='AnonymousUser'){
+            console.log('User is not authenticatedn')
+        }
+        else{
+            updateUserWishlistOrder(productId, action)
+        }
+        
+    })}
     price_location.innerHTML = '<h4 style="display: inline-block; float:right">Price: <strong>&#8377;' + productPrice + '</strong></h4>'
 
         })}
@@ -220,4 +237,3 @@ updatePop[i].addEventListener('click', function(){
    
     
     {% endblock content %}
-
