@@ -244,9 +244,9 @@ def updateWishlistItem(request):
     if orderItem.quantity is None:
         orderItem.quantity = 0
 
-    if action == 'add':
+    if action == 'wadd':
         orderItem.quantity = (orderItem.quantity + 1)
-    elif action == 'remove':
+    elif action == 'wremove':
         orderItem.quantity = (orderItem.quantity - 1)
     
 
