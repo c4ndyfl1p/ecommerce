@@ -1,0 +1,72 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div class = container>
+	<div class="row justify-content-md-center">
+		<div class="col-lg-11">
+			<div class="box-element">
+
+				<a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+
+				<br>
+				<br>
+				<table class="table">
+					<tr>
+						<th><h5>Total: <strong>&#8377;{{order.get_cart_total}}</strong></h5></th>
+						<th><h5>Items:<strong> {{order.get_cart_items}}</strong></h5></th>
+						<th>
+							<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'cart' %}">Go To Cart</a>
+						</th>
+					</tr>
+				</table>
+
+			</div>
+
+			<br>
+			<div class="box-element">
+				<div class="cart-row">
+					<div style="flex:2"></div>
+					<div style="flex:2"><strong>Item</strong></div>
+					<div style="flex:1"><strong>Price</strong></div>
+					<div style="flex:1"><strong>Quantity</strong></div>
+					<div style="flex:1"><strong>Total</strong></div>
+					<div style="flex:2"><strong>Move to Cart</strong></div>
+
+				</div>
+
+				{% for item in items %}
+				<div class="cart-row cart_display" data-id={{item.product.id}} data-quantity="{{item.quantity}}">
+					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+					<div style="flex:2"><p>{{ item.product.name }}</p></div>
+					<div style="flex:1"><p>&#8377;{{ item.product.price}}</p></div>
+					<div style="flex:1">
+						<p class="quantity">{{item.quantity}}</p>
+						<div class="quantity">
+							<img data-product={{item.product.id}} data-waction="wadd" class="chg-quantity update-wishlist" src="{% static  'images/arrow-up.png' %}">
+					
+							<img data-product={{item.product.id}} data-waction="wremove" class="chg-quantity update-wishlist" src="{% static  'images/arrow-down.png' %}">
+						</div>
+					</div>
+					<div style="flex:1"><p>&#8377;{{item.get_total}}</p></div>
+					<div style="flex:2">
+						<button data-product={{item.product.id}} data-action="add" data-waction="wremove" class="btn btn-outline-secondary add-btn update-cart update-wishlist">Move to Cart</button>
+					</div>
+				</div>
+				
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	var cart_display = document.getElementsByClassName('cart_display')
+	
+	for(var i=0; i<cart_display.length; i++){
+		if(cart_display[i].dataset.quantity == 0){
+		cart_display[i].style.display="none"
+		}
+	}
+	
+</script>
+{% endblock content %}

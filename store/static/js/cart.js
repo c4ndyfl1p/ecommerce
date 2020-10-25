@@ -20,7 +20,7 @@ for(var i = 0; i< updateBtns.length; i++){
 }
 
 function updateUserOrder(productId, action){
-    // 9646328797-adhiraj
+    
     console.log('User is logged in, sending data.. change')
 
     console.log('helloo1')

@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +29,9 @@ SECRET_KEY = '_7iv@&b)z%-9#y87dupgh6gvo@4*^j47d-^_m4xe5vr^)6_88w'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'jar3d.herokuapp.com']
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Application definition
 
@@ -49,6 +54,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+  'whitenoise.middleware.WhiteNoiseMiddleware',
+  # ...
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -84,6 +92,8 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -129,10 +139,19 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'jarthreedeewale@gmail.com'
 EMAIL_HOST_PASSWORD = 'python@123'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "store/static",
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')
 ]
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
-MEDIA_URL = '/images/'
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT = BASE_DIR/ "store/static/images/"
+MEDIA_ROOT = os.path.join(BASE_DIR,'store/static/images/')
+
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR,  'templates'),
+    # Add to this list all the locations containing your static files 
+)
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())

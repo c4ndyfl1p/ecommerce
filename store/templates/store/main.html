@@ -47,6 +47,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                 <a class="nav-link" href="{% url 'store' %}">Store <span class="sr-only">(current)</span></a>
+                
                
                 </li>
             <!-- <li class="nav-item">
@@ -78,6 +79,8 @@
                     <a href= "{% url 'register' %}" class="btn btn-warning" style="margin-right:10px ;">Register</a>
                     <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
                 {% endif %}
+
+                <a  href="{% url 'wishlist' %}"> Wishlist </a>
                         
                 <a href="{% url 'cart' %}"> 
                     <img  id="cart-icon" src="{% static 'images/cart.png' %}">                
@@ -115,6 +118,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/wishlist.js' %}"></script>
     
     <script type="text/javascript" src="{% static 'js/filter.js' %}"></script>
     
