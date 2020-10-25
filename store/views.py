@@ -21,23 +21,7 @@ class transaction_id():
         return transaction1
 
 
-def store(request):
 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer = customer, transaction_id= transaction_id.transaction_id(), complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        # when user is not logged on. Creating manual 0 values
-        # so no error is thrown
-        items=[]
-        order = {'get_cart_total':0, 'get_cart_items':0}
-        cartItems = 0
-
-    products = Product.objects.all()
-    context = {'products': products, 'cartItems': cartItems}
-    return render(request, 'store/store.html', context)
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -206,3 +190,70 @@ def login_request(request):
     form = AuthenticationForm()
     context = {'form': form}
     return render(request, "store/login.html", context)
+
+def store(request):
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer = customer, transaction_id= transaction_id.transaction_id(), complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # when user is not logged on. Creating manual 0 values
+        # so no error is thrown
+        items=[]
+        order = {'get_cart_total':0, 'get_cart_items':0}
+        cartItems = 0
+
+    products = Product.objects.all()
+    context = {'products': products, 'cartItems': cartItems}
+    return render(request, 'store/store.html', context)
+
+def wishlist(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = WishlistOrder.objects.get_or_create(customer = customer, transaction_id= transaction_id.transaction_id(), complete=False)
+        items = order.wishlistorderitem_set.all()
+        wcartItems = order.get_cart_items
+        
+    else:
+        # when user is not logged on. Creating manual 0 values
+        # so no error is thrown
+        items=[]
+        order = {'get_cart_total':0, 'get_cart_items':0}
+        wcartItems = 0
+
+    context = {'items':items, 'order': order, 'wcartItems': wcartItems}
+    return render(request, 'store/wishlist.html',context)
+
+def updateWishlistItem(request):
+    data = json.loads(request.body)
+    productId = data['productId']
+    action = data['action']
+
+    print('Action:', action)
+    print('productId', productId)
+
+    customer = request.user.customer
+    product = Product.objects.get(id=productId)
+    order, created = WishlistOrder.objects.get_or_create(customer=customer, transaction_id= transaction_id.transaction_id(), complete=False)
+
+    orderItem, created = WishlistOrderItem.objects.get_or_create(order=order, product=product)
+    
+    # #resolves the error while adding new products
+    if orderItem.quantity is None:
+        orderItem.quantity = 0
+
+    if action == 'wadd':
+        orderItem.quantity = (orderItem.quantity + 1)
+    elif action == 'wremove':
+        orderItem.quantity = (orderItem.quantity - 1)
+    
+
+    orderItem.save()
+
+    if orderItem.quantity <= 0:
+        orderItem.delete()
+	
+
+    return JsonResponse('Item was added to Wishlist', safe=False)

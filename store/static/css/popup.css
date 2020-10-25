@@ -33,7 +33,7 @@ li:hover{
      width: 750px;
      height: 520px;
      z-index:2;
-     text-align: center;
+     text-align: left;
      padding:20px;
      box-sizing: border-box;
      box-shadow:rgb(124, 124, 124) 10px 10px 50px;
@@ -57,27 +57,27 @@ li:hover{
 
  }
 
- .popup.active .overlay {
-     display:block;   
- }
+.popup.active .overlay {
+    display:block;   
+}
 
- .popup.active .content {
-    position:fixed;
-    transition: all 300ms ease-in-out;
-    transform:translate(-50%,-50%) scale(1); 
- }
+.popup.active .content {
+position:fixed;
+transition: all 300ms ease-in-out;
+transform:translate(-50%,-50%) scale(1); 
+}
 
- #popup_description {
-     top:80px;
-     padding:20px;
+#popup_description {
+    top:80px;
+    padding:20px;
 
- }
+}
 
- #popup_buttons {
-     float: center;
-     padding:20px;
- }
- #popup_price {
-  float: left;
-  padding:20px;
+#popup_buttons {
+    float: center;
+    padding:20px;
+}
+#popup_price {
+float: left;
+padding:20px;
 }
