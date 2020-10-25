@@ -74,7 +74,7 @@
             </div>
             <!--End-->
 
-            
+            <!-- MAIN CODE REFER HERE -->            
            
             {% for product in products %}
             
@@ -100,6 +100,9 @@
                                 View
                     </button>
                     <!--End-->
+
+                    <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-wishlist">Add to Wishlist</button>
+                    
 
                     <h4 style="display: inline-block; float:right">
                         <strong>&#8377;{{product.price|floatformat:0}}</strong>
