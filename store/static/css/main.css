@@ -6,6 +6,11 @@ h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
 }
 
+#welcome {
+	margin: 10px;
+	padding: 5px;
+	color: white;
+}
 .box-element{
 	box-shadow:hsl(0, 0%, 80%) 0 0 16px; 
 	background-color: hsl(0, 0%, 100%);
@@ -14,11 +19,11 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .thumbnail{
-	width: 100%;
-	height: 63%;
-	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
-    -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
-    box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+	height: 60%;
+	width:100%;
+	-webkit-box-shadow: -1px -3px 5px -2px rgb(104, 94, 94);
+    -moz-box-shadow: -1px -3px 5px -2px rgb(102, 92, 92);
+    box-shadow: -1px -3px 5px -2px rgb(102, 97, 97);
 }
 
 .product{
@@ -96,4 +101,31 @@ h1,h2,h3,h4,h5,h6{
 
 .hidden{
 	display: none!important;
+}
+
+.login{
+    width:fit-content;
+    padding: 30px;
+    height:fit-content;
+    margin:0 auto;
+    margin-top: 2%;
+    box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+	background-color: #fff;
+}
+/* Full-width input fields */
+.login .form-control {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-shadow:hsl(0, 0%, 80%) 0 0 10px;
+  box-sizing: border-box;
+}
+.login button{
+    margin:auto;
+}
+
+.filt {
+	margin-left: 20px;
 }

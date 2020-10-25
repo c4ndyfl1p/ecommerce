@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.forms import ModelForm
 
 # Create your models here.
 class Customer(models.Model):
@@ -19,14 +20,18 @@ class Customer(models.Model):
     def save_user_customer(sender, instance, **kwargs):
         instance.customer.save()
 
-    # def __str__(self):
-    #     return self.user
+    def __str__(self):
+         return self.user.username
 
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField()
+    description = models.CharField(max_length=5000, null=True)
     digital = models.BooleanField(default=False, null=True, blank=False)
     image = models.ImageField(null=True, blank=True)
+    fandom_good = models.BooleanField(default=False, null=True, blank=False)
+    home_decor = models.BooleanField(default=False, null=True, blank=False)
+    coaster = models.BooleanField(default=False, null=True, blank=False)
 
     def __str__(self):
         return self.name
@@ -79,6 +84,10 @@ class OrderItem(models.Model):
         #     self.quantity = 0
         total = self.product.price * self.quantity
         return int(total)
+    
+    
+    
+    
 
    
 
@@ -86,7 +95,11 @@ class OrderItem(models.Model):
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete = models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(Order, on_delete = models.SET_NULL, null=True, blank=True)
+    name = models.CharField(max_length=20, null=True)
+    phone = models.CharField(max_length=20, null=True)
+    email = models.EmailField()
     address = models.CharField(max_length=200, null=True)
+    reference = models.CharField(max_length=200, null=True)
     city = models.CharField(max_length=200, null=True)
     state = models.CharField(max_length=200, null=True)
     zipcode = models.CharField(max_length=200, null=True)
@@ -94,3 +107,4 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+

@@ -3,11 +3,82 @@
 {% block content %}
 
 <!-- refer: https://getbootstrap.com/docs/4.5/layout/grid/#row-columns -->
+    <div  class = "row justify-content-md-center bg-change" onmouseover="clearSearch()">
+        <span class="p-3"><strong>Filter:</strong></span>
+        <span class="p-3">
+            <input type="checkbox" id="coaster" checked onchange="filter()" data-status="on">
+            <label>Coasters</label>
+        </span>
+        <span class="p-3">
+            <input type="checkbox" checked id="decor" checked onchange="filter1()" data-status="on">
+            <label>Home Decor</label>
+        </span>
+        <span class="p-3">
+            <input type="checkbox" checked id="fandom" checked onchange="filter2()" data-status="on">
+            <label>Fandom good</label>
+        </span>
+    </div>
+    <div class = container style="position: relative;"> 
+        <!--Code for filter-->
+        
 
-    <div class = container>
-        <div class = "row justify-content-md-center bg-change">
+        <!--Code for search bar-->
+        <div>
+        <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for products">
+       
+        <ul id="myTable" >
+
             {% for product in products %}
-            <div class = "col-lg-4">
+            <li 
+            id = "product_list"
+            style="display:none"
+            data-product_id={{product.id}}
+            data-image="{{product.imageURL}}" 
+            data-product_name=" {{product.name}} " 
+            data-product_description="{{product.description}}" 
+            data-product_price = {{product.price}}
+            class="list-group-item pop_button" 
+            onclick="togglePopup()" 
+            >{{product.name}}</li> 
+            {% endfor %}
+          </ul>           
+          </div>
+
+        <!--end-->
+
+        
+        
+        <br>
+        <div id="product_view" class = "row justify-content-md-center bg-change" onmouseover="clearSearch()">
+           <!--Code for pop up box giving product details-->
+            <div class="popup" id="popup-1">
+                <div class ="overlay"></div>
+                <div class="content">
+                    <div class="close-btn" onclick="togglePopup()">&times;</div>
+                    <h3 id="popup_title"></h3>
+                    <hr>
+                    <div id="popup_image"></div>
+                    <div><strong>Product Id: </strong> <span id="popup_id"></span> </div>
+                    <div id="popup_description"></div>
+                    <hr/>
+                    <div id="popup_price"></div>
+                    <div id="popup_buttons">
+                        <span id ="cart_button"></span>
+                        <span id ="wishlist_button"></span>
+                    </div>
+                    <div id="popup_review">
+                        <h5 style="text-align: left;">Review:</h5>
+                    </div>
+                </div>
+            </div>
+            <!--End-->
+
+            
+           
+            {% for product in products %}
+            
+            
+            <div class = "col-lg-4 product" data-product_name="{{product.name}}" data-coaster="{{product.coaster}}" data-decor="{{product.home_decor}}" data-fandom="{{product.fandom_good}}">
                 
                 <img class = "thumbnail" src="{{product.imageURL}}">
                 <div class = "box-element product">
@@ -15,16 +86,129 @@
                     <hr>
 
                     <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
-                    <h4 style="display: inline-block; float: right">
+                    
+                    <!--Code for view giving product details in popup box-->
+                    <button data-product_id={{product.id}}
+                            data-image="{{product.imageURL}}" 
+                            data-product_name=" {{product.name}} " 
+                            data-product_description="{{product.description}}" 
+                            data-product_price = {{product.price}}
+                            data-cart_button= '<button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>'
+                            class="btn btn-outline-success pop_button" 
+                            onclick="togglePopup()">
+                                View
+                    </button>
+                    <!--End-->
+
+                    <h4 style="display: inline-block; float:right">
                         <strong>&#8377;{{product.price|floatformat:0}}</strong>
                     </h4>
+
+                   
                 </div>
             </div> 
+            
+            
             {% endfor %}
     
 
         </div>
     </div>
 
+    <script>
+        function clearSearch() {
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {  
+                li[i].style.display="none";
+            }
+        }
+        function myFunction() {
+          // Declare variables
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          ul = document.getElementById("myTable");
+          li = ul.getElementsByTagName("li");
+          
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < li.length; i++) {                
+              txtValue = li[i].textContent && li[i].innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+              } else {
+                li[i].style.display = "none";
+              }
+            }  
+          }
+
+          var updatePop= document.getElementsByClassName('pop_button')
+
+for(var i = 0; i< updatePop.length; i++){
+updatePop[i].addEventListener('click', function(){
+    var productId =  this.dataset.product_id
+    var productName = this.dataset.product_name
+    var productDescription = this.dataset.product_description
+    var productPrice = this.dataset.product_price
+    var productImage = this.dataset.image
+
+    image_location = document.getElementById('popup_image')
+    description_location = document.getElementById('popup_description')
+    add_cart_location = document.getElementById('cart_button')
+    wishlist_location = document.getElementById('wishlist_button')
+    price_location = document.getElementById('popup_price')
+    id_location = document.getElementById('popup_id')
+
+    document.getElementById("popup_title").innerHTML =  productName ;
+
+    var img = document.createElement("img");
+    img.src = productImage;
+    img.style.width = "35%";
+    img.style.minWidth = "210px";
+    img.style.height = "40%";
+    img.style.minHeight = "230px";
+    img.style.float = "left";
+    img.style.padding = "10px";
+    image_location.innerHTML = "";
+    image_location.appendChild(img)
+    
+    id_location.innerHTML = productId
+    description_location.innerHTML = productDescription
+     
+    add_cart_location.innerHTML = this.dataset.cart_button
+
+    var updateBtns= document.getElementsByClassName('update-cart')
+
+    for(var i = 0; i< updateBtns.length; i++){
+    updateBtns[i].addEventListener('click', function(){
+        var productId =  this.dataset.product
+        var action = this.dataset.action
+        console.log('productId:', productId, 'action:', action)
+        console.log('USER:', user)
+
+        if(user ==='AnonymousUser'){
+            console.log('User is not authenticatedn')
+        }
+        else{
+            updateUserOrder(productId, action)
+        }
+
+    })
+
+
+}
+
+    // Change the following according to wishlist backend, dummy button- functions as add to cart
+    wishlist_location.innerHTML = '<button data-product="' + productId +'" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Wishlist</button>'
+   
+    price_location.innerHTML = '<h4 style="display: inline-block; float:right">Price: <strong>&#8377;' + productPrice + '</strong></h4>'
+
+        })}
+
+        function togglePopup(){           
+            document.getElementById("popup-1").classList.toggle("active");           
+        }
+        </script>
+   
+    
     {% endblock content %}
+
