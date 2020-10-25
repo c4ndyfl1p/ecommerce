@@ -10,6 +10,9 @@ We have used Django as our backend stack. For frontend we are using web template
 * access the webapp using localhost.
 
 
+# Deployed Website
+
+- https://jar3d.herokuapp.com/
 
 # Require Libraries
 
