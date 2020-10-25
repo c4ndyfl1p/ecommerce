@@ -30,6 +30,7 @@
 					<div style="flex:1"><strong>Price</strong></div>
 					<div style="flex:1"><strong>Quantity</strong></div>
 					<div style="flex:1"><strong>Total</strong></div>
+					<div style="flex:2"><strong>Move to Wishlist</strong></div>
 				</div>
 
 				{% for item in items %}
@@ -46,6 +47,9 @@
 						</div>
 					</div>
 					<div style="flex:1"><p>&#8377;{{item.get_total}}</p></div>
+					<div style="flex:2">
+						<button data-product={{item.product.id}} data-action="remove" data-waction="wadd" class="btn btn-outline-secondary add-btn update-cart update-wishlist">Move to Wishlist</button>
+					</div>
 				</div>
 				
 				{% endfor %}
