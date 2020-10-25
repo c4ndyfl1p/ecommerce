@@ -24,25 +24,26 @@
 
         <!--Code for search bar-->
         <div>
-        <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for products">
+            <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for products">
        
-        <ul id="myTable" >
+            <ul id="myTable" >
 
-            {% for product in products %}
-            <li 
-            id = "product_list"
-            style="display:none"
-            data-product_id={{product.id}}
-            data-image="{{product.imageURL}}" 
-            data-product_name=" {{product.name}} " 
-            data-product_description="{{product.description}}" 
-            data-product_price = {{product.price}}
-            class="list-group-item pop_button" 
-            onclick="togglePopup()" 
-            >{{product.name}}</li> 
-            {% endfor %}
-          </ul>           
-          </div>
+                {% for product in products %}
+                <li 
+                    id = "product_list"
+                    style="display:none"
+                    data-product_id={{product.id}}
+                    data-image="{{product.imageURL}}" 
+                    data-product_name=" {{product.name}} " 
+                    data-product_description="{{product.description}}" 
+                    data-product_price = {{product.price}}
+                    class="list-group-item pop_button" 
+                    onclick="togglePopup()" 
+                    >{{product.name}}
+                </li> 
+                {% endfor %}
+            </ul>           
+        </div>
 
         <!--end-->
 
@@ -110,6 +111,7 @@
             
             
             {% endfor %}
+
     
 
         </div>
@@ -117,29 +119,33 @@
 
     <script>
         function clearSearch() {
-            li = ul.getElementsByTagName("li");
+            li = document.getElementsByTagName("li");
             for (i = 0; i < li.length; i++) {  
                 li[i].style.display="none";
             }
         }
         function myFunction() {
           // Declare variables
-          var input, filter, table, tr, td, i, txtValue;
-          input = document.getElementById("myInput");
-          filter = input.value.toUpperCase();
-          ul = document.getElementById("myTable");
-          li = ul.getElementsByTagName("li");
-          
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myTable");
+            li = document.getElementsByTagName("li");
+            
           // Loop through all table rows, and hide those who don't match the search query
-          for (i = 0; i < li.length; i++) {                
-              txtValue = li[i].textContent && li[i].innerText;
-              if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-              } else {
-                li[i].style.display = "none";
-              }
-            }  
-          }
+            for (i = 0; i < li.length; i++) 
+                {                
+                txtValue = li[i].textContent && li[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) 
+                    {
+                        li[i].style.display = "";
+                    } 
+                else 
+                {
+                    li[i].style.display = "none";
+                }
+                }  
+                }
 
           var updatePop= document.getElementsByClassName('pop_button')
 
@@ -162,10 +168,10 @@ updatePop[i].addEventListener('click', function(){
 
     var img = document.createElement("img");
     img.src = productImage;
-    img.style.width = "35%";
-    img.style.minWidth = "210px";
+    img.style.width = "60%";
+    // img.style.minWidth = "210px";
     img.style.height = "40%";
-    img.style.minHeight = "230px";
+    // img.style.minHeight = "230px";
     img.style.float = "left";
     img.style.padding = "10px";
     image_location.innerHTML = "";
