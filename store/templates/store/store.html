@@ -38,6 +38,8 @@
                     data-product_description="{{product.description}}" 
                     data-product_price = {{product.price}}
                     class="list-group-item pop_button" 
+                    data-cart_button= '<button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>'
+                    data-wishlist_button= '<button data-product={{product.id}} data-waction="wadd" class="btn btn-outline-secondary add-btn update-wishlist">Add to Wishlist</button>'
                     onclick="togglePopup()" 
                     >{{product.name}}
                 </li> 
