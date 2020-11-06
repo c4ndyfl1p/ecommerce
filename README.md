@@ -59,7 +59,7 @@ We have used Django as our backend stack. For frontend we are using web template
 * Pillow==8.0.0
 * django-crispy-forms==1.9.2
 
-# References for the project:
+# References for the project
 
 *  Django Ecommerce Website (Pre Release), Channel: Ivy Dennis, Youtube, uploaded: April 23 2020, link: https://www.youtube.com/watch?v=QSyrThcaghg2. 
 *  Django Framework (3.0) Crash Course Tutorials, Channel: Ivy Dennis, Youtube, uploaded: April 23 2020, link: https://www.youtube.com/watch?v=xv_bwpA_aEA&list=PL-51WBLyFTg2vW-_6XBoUpE7vpmoR3ztO3. 
